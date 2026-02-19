@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planner Martingale - 2 Colunas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section id="auth-card" class="card">
+      <h1>Martingale Cassino (2 Colunas)</h1>
+      <p class="muted">Cadastre-se e salve seu planejamento por usuário.</p>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="login" type="button">Login</button>
+        <button class="tab" data-tab="register" type="button">Cadastro</button>
+      </div>
+
+      <form id="login-form" class="form active">
+        <label>Usuário
+          <input type="text" name="username" required minlength="3" />
+        </label>
+        <label>Senha
+          <input type="password" name="password" required minlength="4" />
+        </label>
+        <button type="submit">Entrar</button>
+      </form>
+
+      <form id="register-form" class="form">
+        <label>Novo usuário
+          <input type="text" name="username" required minlength="3" />
+        </label>
+        <label>Nova senha
+          <input type="password" name="password" required minlength="4" />
+        </label>
+        <button type="submit">Criar conta</button>
+      </form>
+
+      <p id="auth-message" class="message"></p>
+    </section>
+
+    <section id="app-card" class="card hidden">
+      <div class="header-row">
+        <h2>Calculadora de Dúzias (2 colunas)</h2>
+        <button id="logout-btn" class="secondary" type="button">Sair</button>
+      </div>
+      <p id="welcome" class="muted"></p>
+
+      <form id="calc-form" class="form active">
+        <label>Banca disponível (R$)
+          <input type="number" step="0.01" min="0.01" name="bankroll" required />
+        </label>
+
+        <label>Aposta base em CADA coluna (R$)
+          <input type="number" step="0.01" min="0.01" name="baseBet" required />
+        </label>
+
+        <label>Meta diária da banca (%)
+          <input type="number" step="0.1" min="0.1" name="goalPercent" value="2" required />
+        </label>
+
+        <label>Níveis de martingale desejados
+          <input type="number" step="1" min="1" name="targetLevels" value="8" required />
+        </label>
+
+        <button type="submit">Calcular plano</button>
+      </form>
+
+      <section id="results" class="results hidden">
+        <h3>Resumo da estratégia</h3>
+        <ul>
+          <li><strong>Meta diária:</strong> <span id="daily-goal"></span></li>
+          <li><strong>Lucro por ciclo vencedor:</strong> <span id="profit-per-cycle"></span></li>
+          <li><strong>Ciclos para bater a meta:</strong> <span id="cycles-needed"></span></li>
+          <li><strong>Níveis suportados pela banca:</strong> <span id="levels-supported"></span></li>
+          <li><strong>Banca mínima para atingir níveis desejados:</strong> <span id="required-bankroll"></span></li>
+          <li><strong>Status meta de níveis:</strong> <span id="levels-status"></span></li>
+        </ul>
+
+        <h4>Progressão Martingale (apostando em 2 colunas)</h4>
+        <p class="muted">Regra usada: quando acerta em uma das 2 colunas escolhidas, o lucro líquido da rodada é igual ao valor apostado em cada coluna naquele nível.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Nível</th>
+              <th>Aposta por coluna</th>
+              <th>Total apostado na rodada (2 colunas)</th>
+              <th>Perda acumulada se errar até aqui</th>
+              <th>Lucro líquido se ganhar neste nível</th>
+            </tr>
+          </thead>
+          <tbody id="progression-body"></tbody>
+        </table>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
